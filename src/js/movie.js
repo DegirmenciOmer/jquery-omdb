@@ -13,14 +13,12 @@ $(function () {
 function getMovie() {
   const urlParams = new URLSearchParams(window.location.search)
   const movieId = urlParams.get('id')
-  console.log(movieId)
   // Use the movieId to fetch the movie details
   axios
     .get(`http://www.omdbapi.com?apikey=${process.env.API_KEY}&i=${movieId}`)
     .then((response) => {
-      console.log(response.data)
       const movie = response.data
-      let output = `<div class="row">
+      let output = `<div class="container">
       <div class="col-md-4">
         <img src="${movie.Poster}" class="thumbnail">
       </div>
@@ -37,11 +35,10 @@ function getMovie() {
         </ul>
       </div>
     </div>
-    <div class="row">
-      <div class="well">
+    <div class="container">
+      <div class="container">
         <h3>Plot</h3>
         ${movie.Plot}
-        <hr>
         <a href="http://imdb.com/title/${movie.imdbID}" target="_blank" class="btn btn-primary">View IMDB</a>
         <a href="index.html" class="btn btn-default">Go Back To Search</a>
       </div>

@@ -5,7 +5,7 @@ const Dotenv = require('dotenv-webpack')
 module.exports = {
   mode: 'development',
   entry: {
-    bundle: path.resolve(process.cwd(), 'src/index.js'),
+    index: path.resolve(process.cwd(), 'src/index.js'),
     movie: path.resolve(process.cwd(), 'src/js/movie.js'),
   },
   output: {
