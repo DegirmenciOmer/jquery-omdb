@@ -6,6 +6,7 @@ module.exports = {
   mode: 'development',
   entry: {
     bundle: path.resolve(process.cwd(), 'src/index.js'),
+    movie: path.resolve(process.cwd(), 'src/js/movie.js'),
   },
   output: {
     filename: '[name][contenthash].js',
@@ -52,6 +53,11 @@ module.exports = {
       title: 'Webpack App',
       filename: 'index.html',
       template: 'src/template.html',
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Movie Page',
+      filename: 'movie.html', // Specify the filename for the new page
+      template: 'src/movie_template.html', // Use the same template as the existing page(s)
     }),
   ],
 }

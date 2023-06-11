@@ -1,13 +1,73 @@
 import $ from 'jquery'
-import generateJoke from './generateJoke.js'
 import './styles/main.scss'
-
-const laughing = 'https://thispersondoesnotexist.com/'
+import axios from 'axios'
+import moviePoster from './images/movie.jpg'
 
 $(function () {
-  $('#laughImg').attr('src', laughing)
+  $('#searchForm').on('submit', (e) => {
+    e.preventDefault()
+    let searchValue = $('#searchText').val()
+    getMovies(searchValue)
+    console.log(searchValue)
+  })
 
-  $('#jokeBtn').on('click', generateJoke)
-
-  generateJoke()
+  $('#navigateToMoviePage').on('click', () => {
+    window.location.href = 'movie.html'
+  })
 })
+
+function movieSelected(imdbID) {
+  console.log(imdbID)
+  localStorage.setItem('selectedMovieID', imdbID)
+  // Redirect to the movie page
+  window.location.href = 'movie.html'
+}
+
+function getMovies(searchText) {
+  axios
+    .get(`http://www.omdbapi.com?apikey=${process.env.API_KEY}&s=${searchText}`)
+    .then((response) => {
+      console.log(response.data.Search)
+      let movies = response.data.Search
+      let output = ''
+      $.each(movies.slice(0, 2), (index, movie) => {
+        output += `
+              <div class="movie">
+                <div class="well text-center">
+                  <img src="${
+                    movie.Poster === 'N/A' ? moviePoster : movie.Poster
+                  }">
+                  <h5>${movie.Title}</h5>
+                  <a href="movie.html?id=${
+                    movie.imdbID
+                  }" class="btn btn-primary">Movie Details</a>
+
+                </div>
+              </div>
+            `
+      })
+
+      $('#movies').html(output)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+function getMovie() {
+  const urlParams = new URLSearchParams(window.location.search)
+  const movieId = urlParams.get('id')
+  console.log(movieId)
+  // Use the movieId to fetch the movie details
+  axios
+    .get(`http://www.omdbapi.com?apikey=${process.env.API_KEY}&i=${movieId}`)
+    .then((response) => {
+      console.log(response.data)
+      // Process the movie details as needed
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+// Export the movieSelected function if necessary
