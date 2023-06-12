@@ -27,7 +27,9 @@ function movieSelected(imdbID) {
 
 function getMovies(searchText) {
   axios
-    .get(`http://www.omdbapi.com?apikey=${process.env.API_KEY}&s=${searchText}`)
+    .get(
+      `https://www.omdbapi.com?apikey=${process.env.API_KEY}&s=${searchText}`
+    )
     .then((response) => {
       console.log(response.data.Search)
       let movies = response.data.Search
