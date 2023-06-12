@@ -4,7 +4,7 @@ import axios from 'axios'
 import moviePoster from './images/movie.jpg'
 
 $(function () {
-  getMovies('home')
+  console.log(process.env.API_KEY)
 
   $('#searchForm').on('submit', (e) => {
     e.preventDefault()
@@ -26,6 +26,7 @@ function movieSelected(imdbID) {
 }
 
 function getMovies(searchText) {
+  console.log(searchText)
   axios
     .get(
       `https://www.omdbapi.com?apikey=${process.env.API_KEY}&s=${searchText}`
