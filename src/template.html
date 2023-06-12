@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    <div class="container">
-      <img id="laughImg" alt="" />
-      <h3>Movies</h3>
-      <div class="container">
+    <div class="container center">
+      <h3>Omdb Movies</h3>
+      <div class="container center">
         <form id="searchForm">
           <input
             type="text"
@@ -19,8 +19,9 @@
             placeholder="Search Movies..."
           />
         </form>
+        <div id="movies" class="movies-container"></div>
       </div>
-      <div id="movies" class="container"></div>
+      <div id="pagination" class=""></div>
     </div>
   </body>
 </html>

@@ -4,6 +4,8 @@ import axios from 'axios'
 import moviePoster from './images/movie.jpg'
 
 $(function () {
+  getMovies('home')
+
   $('#searchForm').on('submit', (e) => {
     e.preventDefault()
     let searchValue = $('#searchText').val()
@@ -30,7 +32,7 @@ function getMovies(searchText) {
       console.log(response.data.Search)
       let movies = response.data.Search
       let output = ''
-      $.each(movies.slice(0, 2), (index, movie) => {
+      $.each(movies, (index, movie) => {
         output += `
               <div class="movie">
                 <div class="well text-center">
@@ -40,7 +42,7 @@ function getMovies(searchText) {
                   <h5>${movie.Title}</h5>
                   <a href="movie.html?id=${
                     movie.imdbID
-                  }" class="btn btn-primary">Movie Details</a>
+                  }" class="btn secondary">Movie Details</a>
 
                 </div>
               </div>

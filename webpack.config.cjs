@@ -19,7 +19,7 @@ module.exports = {
       directory: path.resolve(process.cwd(), 'dist'),
     },
     port: 3000,
-    open: true,
+    // open: true,
     hot: true,
     compress: true,
     historyApiFallback: true,
